@@ -67,8 +67,9 @@ def get_pay_stub():
 
 
 def get_and_parse():
+    file_path = os.environ.get(MACHINE_NAME)
     #Retrieve latest downloaded file
-    files = os.listdir("/home/mystinker08/Downloads/")
+    files = os.listdir("/home/{}}/Downloads/".format(file_path))
     #Create variable to hold latest file
     newest_file = files[-1]
 
