@@ -69,7 +69,7 @@ def get_pay_stub():
 def get_and_parse():
     file_path = os.environ.get("MACHINE_NAME")
     #Retrieve latest downloaded file
-    files = os.listdir("/home/{}}/Downloads/".format(file_path))
+    files = os.listdir("/home/{}/Downloads/".format(file_path))
     #Create variable to hold latest file
     newest_file = files[-1]
 
@@ -85,9 +85,10 @@ def get_and_parse():
     money = df.loc[18, "Col 2"]
     total_hours= sum(hours)
     
+    global email_totals
     email_totals = "You made ${} this pay period, and worked {} hours.".format(money, total_hours)
     
-    print(email_totals)
+    #print(email_totals)
 
 def mail_me():
 
