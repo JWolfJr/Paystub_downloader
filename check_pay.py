@@ -11,18 +11,26 @@ from time import sleep
 import smtplib 
 
 def get_pay_stub():
-    username = input("Enter your username. ")
-    password = getpass.getpass("Now enter your password. ")
-    workpass = os.environ.get("WORK_PASSWORD")
-    if password == workpass:
-        print("Correct, you may enter!")
-    else:
-        print("Wrong, try again!")
+    print("Enter correct username and password")
+    count = 0
+    while count < 3:
+        username = input("Enter your username. ")
+        password = getpass.getpass("Now enter your password. ")
+        workpass = os.environ.get("WORK_PASSWORD")
+        if password == workpass:
+            print("Correct, you may enter!")
+            pay_date = input("Enter pay period date to be emailed, with ##/##/#### format ")
+            break
+        else:
+            print("Wrong, try again!")
+            count += 1
+                
     
     # create variable to hold date of wanted pay period
-    pay_date = input("Enter pay period date to be emailed, with ##/##/#### format ")
+    #pay_date = input("Enter pay period date to be emailed, with ##/##/#### format ")
     
-    driver = webdriver.Chrome('/opt/google/chrome/chromedriver')
+    #driver = webdriver.Chrome('/opt/google/chrome/chromedriver')
+    driver = webdriver.Chrome('/usr/local/chromedriver')
     
     print("Opening browser and navigating to Metras site")
 
@@ -108,7 +116,7 @@ def mail_me():
         
         print("Sending e-mail now")
         
-        smtp.sendmail(EMAIL_ADDRESS, "mystinker08@gmail.com", msg)
+        smtp.sendmail(EMAIL_ADDRESS, EMAIL_ADDRESS, msg)
     
 
 get_pay_stub()
